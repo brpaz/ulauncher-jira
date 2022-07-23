@@ -1,0 +1,63 @@
+{
+  "required_api_version": "^2.0.0",
+  "name": "Jira",
+  "description": "Quickly access your JIRA tickets from Ulauncher",
+  "developer_name": "Bruno Paz",
+  "icon": "images/icon.png",
+  "options": {
+    "query_debounce": 0.2
+  },
+  "preferences": [
+    {
+      "id": "kw_custom_filter",
+      "type": "keyword",
+      "name": "JIRA: Custom Filter",
+      "default_value": "jira:filter"
+    },
+    {
+      "id": "kw_boards",
+      "type": "keyword",
+      "name": "JIRA: Boards",
+      "default_value": "jira:boards"
+    },
+    {
+      "id": "kw_issues_search",
+      "type": "keyword",
+      "name": "JIRA: Search Issues",
+      "default_value": "jira:search"
+    },
+    {
+      "id": "kw_issues_reported",
+      "type": "keyword",
+      "name": "JIRA: My Reported Issues",
+      "default_value": "jira:reported"
+    },
+    {
+      "id": "kw_issues_assigned",
+      "type": "keyword",
+      "name": "JIRA: My Assigned Issues",
+      "default_value": "jira:assigned"
+    },
+    {
+      "id": "server_url",
+      "type": "input",
+      "name": "JIRA Server URL",
+      "description": "The URL to your JIRA server",
+      "default_value": "https://jira.atlassian.com"
+    },
+    {
+      "id": "email",
+      "type": "input",
+      "name": "Email Address",
+      "description": "Email Address of your JIRA user",
+      "default_value": ""
+    },
+    {
+      "id": "access_token",
+      "type": "input",
+      "name": "Acess Token",
+      "description": "The access token to authenticate on Jira API",
+      "default_value": ""
+    }
+  ]
+}

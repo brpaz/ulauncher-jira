@@ -1,0 +1,10 @@
+# This file allows to specificy custom JQL filters that you can access using the "JIRA: Custom filters" keyowrd on Ulauncher
+# To add a new custom filter, create a new item on the filters array as specified below.
+# The following fields are supported
+# - title: The name of the filter that will be displayed on Ulauncher Interface.
+# - jql: The JQL query string that will be executed
+# - key: An unique identifier for the filter.
+filters:
+# - title: "Assigned Issues"
+#   jql: "assignee = currentUser()"
+#   key: assigned
