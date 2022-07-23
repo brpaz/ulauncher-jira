@@ -41,7 +41,7 @@ https://github.com/brpaz/ulauncher-jira
 
 ### Configure settings
 
-Before being able to use the extension, you must configure a few settings.
+Before being able to use this extension, you must configure a few settings with your JIRA account credentials. Open Ulauncher Preferences and input the following settings:
 
 - **server_url** - Your JIRA server URL.
 - **email** - Your user email
