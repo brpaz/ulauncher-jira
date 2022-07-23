@@ -1,6 +1,6 @@
 # Ulauncher JIRA Extension
 
-> Quickly access your [Atlassian JIRA tickets](https://www.atlassian.com/software/jira) from [Ulauncher](https://ulauncher.io/).
+> Quickly access your [JIRA](https://www.atlassian.com/software/jira) Issues, Boards and more, directly from [Ulauncher](https://ulauncher.io/).
 
 [![Ulauncher Extension](https://img.shields.io/badge/Ulauncher-Extension-yellowgreen.svg?style=for-the-badge)](https://ext.ulauncher.io/)
 [![CI Status](https://img.shields.io/github/workflow/status/brpaz/ulauncher-jira/CI?color=orange&label=actions&logo=github&logoColor=orange&style=for-the-badge)](https://github.com/brpaz/ulauncher-jira)
@@ -16,14 +16,21 @@
 * [Ulauncher](https://github.com/Ulauncher/Ulauncher) > 5.0
 * Python >= 3
 
-## Install
+## Getting started
 
 ### Pre-Requesities
 
-Before installing this extension, you should install a few Python packages required by this extension.
+This extensions require a few Python packages to work.
 
-You can use `pip` to do so.
+You can install them, using `pip`.
 
+Ex:
+
+```bash
+pip install -r https://raw.githubusercontent.com/brpaz/ulauncher-jira/main/requirements.txt
+```
+
+### Install the extension
 
 
 Open ulauncher preferences window -> extensions -> add extension and paste the following url:
