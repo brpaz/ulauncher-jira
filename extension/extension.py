@@ -133,49 +133,49 @@ class JiraExtension(Extension):
 
         return RenderResultListAction([
             ExtensionResultItem(icon='images/icon-summary.png',
-                                name="Title",
-                                description=issue.fields.summary,
+                                description="Title",
+                                name=issue.fields.summary,
                                 highlightable=False,
                                 on_enter=CopyToClipboardAction(
                                     issue.fields.summary)),
             ExtensionResultItem(icon='images/icon-id.png',
-                                name="Key",
-                                description=issue.key,
+                                description="Key",
+                                name=issue.key,
                                 highlightable=False,
                                 on_enter=CopyToClipboardAction(issue.key)),
             ExtensionResultItem(icon=self.icon,
-                                name="Type",
-                                description=str(issue.fields.issuetype),
+                                description="Type",
+                                name=str(issue.fields.issuetype),
                                 highlightable=False,
                                 on_enter=DoNothingAction()),
             ExtensionResultItem(icon=self.icon,
-                                name="Status",
-                                description=str(issue.fields.status),
+                                description="Status",
+                                name=str(issue.fields.status),
                                 highlightable=False,
                                 on_enter=DoNothingAction()),
             ExtensionResultItem(icon=self.icon,
-                                name="Priority",
-                                description=str(issue.fields.priority),
+                                description="Priority",
+                                name=str(issue.fields.priority),
                                 highlightable=False,
                                 on_enter=DoNothingAction()),
             ExtensionResultItem(icon='images/icon-assignee.png',
-                                name="Assignee",
-                                description=str(issue.fields.assignee),
+                                description="Assignee",
+                                name=str(issue.fields.assignee),
                                 highlightable=False,
                                 on_enter=DoNothingAction()),
             ExtensionResultItem(icon='images/icon-assignee.png',
-                                name="Reporter",
-                                description=str(issue.fields.reporter),
+                                description="Reporter",
+                                name=str(issue.fields.reporter),
                                 highlightable=False,
                                 on_enter=DoNothingAction()),
             ExtensionResultItem(icon='images/icon-date.png',
-                                name="Created At",
-                                description=issue.fields.created,
+                                description="Created At",
+                                name=issue.fields.created,
                                 highlightable=False,
                                 on_enter=DoNothingAction()),
             ExtensionResultItem(icon='images/icon-url.png',
-                                name="URL",
-                                description=issue_url,
+                                description="URL",
+                                name=issue_url,
                                 highlightable=False,
                                 on_enter=OpenUrlAction(issue_url)),
             ExtensionResultItem(
@@ -258,7 +258,7 @@ class JiraExtension(Extension):
     def list_boards(self, event: KeywordQueryEvent):
         query = event.get_argument() or ""
         boards = self.jira_client.boards(name=query, maxResults=10)
-
+        self.jira_client.sprints_by_name
         if len(boards) == 0:
             return self.show_no_results_message(query)
 
@@ -278,6 +278,33 @@ class JiraExtension(Extension):
         self.current_items = items
         return RenderResultListAction(items)
 
+    def current_sprint(self, event: KeywordQueryEvent):
+        query = event.get_argument() or ""
+        board_id = self.preferences["board_id"]
+
+        if board_id == "":
+            return RenderResultListAction([
+                ExtensionResultItem(
+                    icon=self.icon,
+                    name='Board ID not configured',
+                    description='define "board_id" on extension settings',
+                    highlightable=False,
+                    on_enter=HideWindowAction())
+            ])
+
+        sprints = self.jira_client.sprints(board_id=board_id, state="active")
+
+        if len(sprints) == 0:
+            return self.show_no_results_message(query)
+
+        if query:
+            jql = 'Sprint = {} AND summary ~ "{}*" ORDER BY priority DESC'.format(
+                sprints[0].id, query)
+        else:
+            jql = 'Sprint = {} ORDER BY priority DESC'.format(sprints[0].id)
+
+        return self._search_with_jql(event, jql)
+
     def open_board(self, board):
         board_data = board.raw
         project_key = board_data["location"]["projectKey"]
@@ -288,6 +315,19 @@ class JiraExtension(Extension):
             board.id)
 
         return OpenUrlAction(board_url).run()
+
+    def open_issue(self, event: KeywordQueryEvent):
+        issue_key = event.get_argument()
+
+        issue_url = "{}/browse/{}".format(self.preferences["server_url"],
+                                          issue_key)
+        return RenderResultListAction([
+            ExtensionResultItem(
+                icon=self.icon,
+                name='Press enter to open issue: {}'.format(issue_key),
+                highlightable=False,
+                on_enter=OpenUrlAction(issue_url))
+        ])
 
     def create_jira_client(self, server_url: str, username: str,
                            access_token: str):

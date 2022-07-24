@@ -9,6 +9,12 @@
   },
   "preferences": [
     {
+      "id": "kw_open_issue",
+      "type": "keyword",
+      "name": "JIRA: Open",
+      "default_value": "jira:open"
+    },
+    {
       "id": "kw_custom_filter",
       "type": "keyword",
       "name": "JIRA: Custom Filter",
@@ -25,6 +31,12 @@
       "type": "keyword",
       "name": "JIRA: Search Issues",
       "default_value": "jira:search"
+    },
+    {
+      "id": "kw_current_sprint",
+      "type": "keyword",
+      "name": "JIRA: Current Sprint",
+      "default_value": "jira:sprint"
     },
     {
       "id": "kw_issues_reported",
@@ -55,8 +67,15 @@
     {
       "id": "access_token",
       "type": "input",
-      "name": "Acess Token",
+      "name": "Access Token",
       "description": "The access token to authenticate on Jira API",
+      "default_value": ""
+    },
+    {
+      "id": "board_id",
+      "type": "input",
+      "name": "Board ID",
+      "description": "Specify a board ID to get the issues from current sprint",
       "default_value": ""
     }
   ]

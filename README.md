@@ -57,7 +57,8 @@ This extension provides a few keywords, including:
 - `jira:search` - Search JIRA Issues
 - `jira:boards`  - Lists all the JIRA boards
 - `jira:filter` - Allow custom filters queries using [JQL](https://support.atlassian.com/jira-service-management-cloud/docs/use-advanced-search-with-jira-query-language-jql/).
-
+- `jira:open`  - Open a JIRA issue in the JIRA Web UI, by Issue key.
+- `jira:sprint` - Search on the current sprint issues.
 ### Custom JQL filters
 
 This extemsion allows you to create shortcuts for custom JQL filters. For create your own filters, edit the `~/.config/ulauncher/com.github.brpaz.ulauncher-jira/filters.yaml` and you should be able to execute then in the `JIRA: Custom Filters` menu in the extension.

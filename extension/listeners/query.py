@@ -11,6 +11,8 @@ KEYWORD_ASSIGNED_ISSUES = "kw_issues_assigned"
 KEYWORD_REPORTED_ISSUES = "kw_issues_reported"
 KEYWORD_CUSTOM_FILTERS = "kw_custom_filter"
 KEYWORD_BOARDS = "kw_boards"
+KEYWORD_OPEN = "kw_open_issue"
+KEYWORD_CURRENT_SPRINT = "kw_current_sprint"
 
 
 class KeywordQueryEventListener(EventListener):
@@ -36,6 +38,12 @@ class KeywordQueryEventListener(EventListener):
 
         if kw_id == KEYWORD_BOARDS:
             return extension.list_boards(event)
+
+        if kw_id == KEYWORD_OPEN:
+            return extension.open_issue(event)
+
+        if kw_id == KEYWORD_CURRENT_SPRINT:
+            return extension.current_sprint(event)
 
     def get_keyword_id(self, preferences: dict, keyword: str):
         """ Returns the keyword id, that matches the keyword name passed as argument """
